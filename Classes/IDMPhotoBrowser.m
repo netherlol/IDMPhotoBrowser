@@ -728,6 +728,14 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
     
     UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
     
+    if ([self isLandscape:currentOrientation]) {
+        [self.view removeGestureRecognizer:_panGesture];
+        _doneButton.hidden = YES;
+    } else {
+        [self.view addGestureRecognizer:_panGesture];
+        _doneButton.hidden = NO;
+    }
+    
     // Toolbar
     _toolbar.frame = [self frameForToolbarAtOrientation:currentOrientation];
     
